@@ -34,14 +34,26 @@ func run(steps []byte) {
 			fmt.Scanf("%c", &ticker[sp])
 		case '[':
 			if ticker[sp] == 0 {
-				for steps[i] != ']' {
+				bal := 1
+				for bal != 0 {
 					i++
+					if steps[i] == '[' {
+						bal++
+					} else if steps[i] == ']' {
+						bal--
+					}
 				}
 			}
 		case ']':
 			if ticker[sp] != 0 {
-				for steps[i] != '[' {
+				bal := 1
+				for bal != 0 {
 					i--
+					if steps[i] == ']' {
+						bal++
+					} else if steps[i] == '[' {
+						bal--
+					}
 				}
 			}
 		}
