@@ -28,7 +28,7 @@ func main() {
 	program := flag.Args()[0]
 
 	if !strings.HasSuffix(program, ".bf") {
-		log.Fatalf("%s does not to be a brainfuck program\n", program)
+		log.Fatalf("%s does not appear to be a brainfuck program\n", program)
 	}
 
 	instructions, err := ioutil.ReadFile(program)
