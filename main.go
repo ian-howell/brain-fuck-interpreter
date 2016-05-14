@@ -9,6 +9,54 @@ import (
 	"strings"
 )
 
+func run(steps []byte) {
+	ticker := make([]byte, 30000)
+	sp := 0
+	for i := 0; i < len(steps); i++ {
+		switch steps[i] {
+		case '+':
+			ticker[sp]++
+		case '-':
+			ticker[sp]--
+		case '>':
+			if sp == 29999 {
+				log.Fatal("ERROR: walked off right of array\n")
+			}
+			sp++
+		case '<':
+			if sp == 0 {
+				log.Fatal("ERROR: walked off left of array\n")
+			}
+			sp--
+		case '.':
+			fmt.Printf("%c", ticker[sp])
+		case ',':
+			fmt.Scanf("%c", &ticker[sp])
+		case '[':
+			if ticker[sp] == 0 {
+				for steps[i] != ']' {
+					i++
+				}
+			}
+		case ']':
+			if ticker[sp] != 0 {
+				for steps[i] != '[' {
+					i--
+				}
+			}
+		}
+	}
+
+	fmt.Printf("\n|")
+	for _, ele := range ticker {
+		if ele != 0 {
+			fmt.Printf("%d|", ele)
+		}
+	}
+
+	fmt.Println()
+}
+
 func main() {
 	// Set usage message
 	flag.Usage = func() {
@@ -35,4 +83,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("There was a problem when opening %s\n", program)
 	}
+
+	run(instructions)
 }
