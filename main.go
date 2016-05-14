@@ -58,15 +58,6 @@ func run(steps []byte) {
 			}
 		}
 	}
-
-	fmt.Printf("\n|")
-	for _, ele := range ticker {
-		if ele != 0 {
-			fmt.Printf("%d|", ele)
-		}
-	}
-
-	fmt.Println()
 }
 
 func main() {
